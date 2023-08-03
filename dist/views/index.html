@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Share a piece of code to anyone.">
+    <title>Paste Sharing</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css">
+  </head>
+  <body>
+    <nav class="navbar bg-dark">
+      <div class="container-fluid">
+        <span class="navbar-brand mb-0 text-light h1">Paste Sharing</span>
+        <button id="find-paste" class="btn btn-primary">Find Paste</button>
+    </nav>
+    <div class="container mt-5">
+      <!-- Modal -->
+      <div class="modal fade" id="paste-information">
+        <div class="modal-dialog mt-5">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="modal-title fs-5" id="exampleModalLabel">Paste Information</h1>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body" id="paste-info"></div>
+            <div class="modal-footer">
+              <button id="close" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              <button id="copynclose" class="btn btn-primary">Copy Url</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="mb-3">
+        <label for="name">Paste Name</label>
+        <input type="text" class="form-control mt-md-4" name="name" id="name" placeholder="Enter name of your paste">
+      </div>
+      <div class="mb-3">
+        <label for="name">Password (optional)</label>
+        <input type="text" class="form-control mt-md-4" name="password" id="password" placeholder="Enter Password for your paste">
+      </div>
+      <div class="mb-3">
+        <label for="cookie" class="form-label">Content</label>
+        <textarea class="form-control" id="paste" rows="10" placeholder="Enter your paste content here"></textarea>
+      </div>
+      <button id="create-paste" class="btn btn-primary mt-3 w-100">Create Paste</button>
+    </div>
+    <footer class="my-4">
+      <ul class="nav border-bottom pb-3 mb-3"></ul>
+      <p class="text-center text-body-secondary mb-0">&copy; 2023 Paste Sharing | libyzxy0</p>
+    </footer>
+    <!-- Add jQuery script to your HTML -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="script.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>

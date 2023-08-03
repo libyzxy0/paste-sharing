@@ -1,0 +1,38 @@
+{
+  "name": "paste-sharing",
+  "version": "1.0.0",
+  "description": "Text/Code sharing platform, to easily access a code/text with others.",
+  "main": "index.js",
+  "scripts": {
+    "start": "tsc && cp -r src/views dist/ && cp -r src/public dist/ && node dist/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/libyzxy0/paste-sharing.git"
+  },
+  "keywords": [
+    "paste-sharing",
+    "code"
+  ],
+  "author": "Jan Liby Dela Costa (libyzxy0)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/libyzxy0/paste-sharing/issues"
+  },
+  "homepage": "https://github.com/libyzxy0/paste-sharing#readme",
+  "devDependencies": {
+    "@types/cors": "^2.8.13",
+    "@types/dotenv": "^8.2.0",
+    "@types/ejs": "^3.1.2",
+    "@types/express": "^4.17.17",
+    "@types/node": "^20.4.6",
+    "cors": "^2.8.5",
+    "mongoose": "^7.4.1",
+    "typescript": "^5.1.6"
+  },
+  "dependencies": {
+    "ejs": "^3.1.9",
+    "express": "^4.18.2",
+    "path": "^0.12.7"
+  }
+}
