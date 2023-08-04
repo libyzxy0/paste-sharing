@@ -43,13 +43,19 @@ app.post('/api/new-paste', (req, res) => __awaiter(void 0, void 0, void 0, funct
     const paste = req.body.paste;
     const password = req.body.password;
     const genID = (length) => Array.from({ length }, () => Math.random().toString(36).charAt(2)).join('');
+    const currentDate = new Date();
+    const date = currentDate.toDateString();
+    const time = currentDate.toLocaleTimeString();
+    const exp = new Date();
+    exp.setDate(exp.getDate() + 1);
+    let expire = exp.toDateString();
     const id = genID(6);
     try {
         const newPaste = new Paste_1.Paste({
             name: name,
             paste: paste,
             password: password,
-            createdAt: new Date(),
+            createdAt: new Date().getDate(),
             id: id
         });
         yield newPaste.save();
@@ -57,12 +63,43 @@ app.post('/api/new-paste', (req, res) => __awaiter(void 0, void 0, void 0, funct
             name: name,
             id: id,
             url: `https://paste.x-cnx.repl.co/${id}`,
-            created: new Date(),
-            expire: "Not available"
+            created: `${date}:${time}`,
+            expire: `${expire}:${time}`
         });
     }
     catch (error) {
         res.status(500).send({ error: "Something went wrong" });
     }
 }));
+function removePasteById(pasteId) {
+    return __awaiter(this, void 0, void 0, function* () {
+        try {
+            const paste = yield Paste_1.Paste.findById(pasteId);
+            if (!paste) {
+                console.log('Paste not found.');
+                return;
+            }
+            // Remove the paste
+            yield paste.deleteOne();
+            console.log('Expire Paste removed successfully.');
+        }
+        catch (error) {
+            console.error('Error removing paste:', error);
+        }
+    });
+}
+function expiryHandler() {
+    return __awaiter(this, void 0, void 0, function* () {
+        const paste = yield Paste_1.Paste.find();
+        const currentDate = new Date();
+        const expirationDate = new Date(currentDate.getTime() - 24 * 60 * 60 * 1000); // Subtract 24 hours from the current date
+        const exp = paste.filter((pasteItem) => new Date(pasteItem.createdAt) > expirationDate);
+        if (exp.length !== 0) {
+            for (let i = 0; i < exp.length; i++) {
+                removePasteById(exp[i]._id);
+            }
+        }
+    });
+}
+setInterval(expiryHandler, 5000);
 app.listen(port, () => console.log(`Server is running on http://localhost:${port}`));
